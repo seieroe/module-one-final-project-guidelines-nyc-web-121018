@@ -27,16 +27,15 @@ def new_customer
   end
 end
 
-
+#----- helper methods for CREATE NEW CUSTOMER ----
 def get_name
   puts "What is your name?"
 end
 
-#puts "Hi #{name}, welcome to the lottery store."
+#puts "Hi #{name}."
 
 def get_age
   puts "what is your age?"
-  # age = gets.chomp.to_i
 end
 
 def age_check(age)
@@ -50,29 +49,35 @@ end
 
 def get_wallet
   puts "How much money do you have?"
-  #write a helper method that cuts the dollar sign off the beginning
-  #if $ takes it off, else do nothing
-  # wallet = gets.chomp.to_f
 end
 
 def wallet_check(userwallet)
   if userwallet < 3
-    #TO DO: if there is a $ it changes to just the number
     puts "Sorry you need more money to play lottery."
     exit
   else
     puts "Alright, let's play lottery!"
-    #TO DO: assigns a store instance to this game
   end
 end
+#----- end helper methods for CREATE NEW CUSTOMER ----
 
-# --------------- ENDS CREATES NEW USER METHODS -------------------------
+# --------------- ENDS CREATES NEW CUSTOMER METHODS -------------------------
 
-# ---------------BEGIN PLAY LOTTERY---------------
+#-------- CHOOSES STORE -------------
+def choose_store
+  Store.all.shuffle.first
+end
+#-------- ENDS CHOOSES STORE -------
+
+
+# ---------------BEGIN PLAY LOTTERY----------------------------------
 def play_lottery
   puts "Would you like to buy a ticket? yes/no"
     answer = gets.chomp
     if answer == "yes"
+      current_wallet = Customer.last.bank_account
+      new_wallet = current_wallet - 3
+      Customer.last.update(bank_account: new_wallet)
       #program continues to execute
     elsif answer == "no"
       puts "Ok thanks, come back later to play lottery"
@@ -80,19 +85,12 @@ def play_lottery
     else
       puts "It's a yes or no question."
       #TO DO stretch goal loops back through puts "Would you like to buy a ticket? yes/no"
-      #to do terminal flashes red
       exit
     end
   end
 
 
-
-#----- CHOOSES EXISTING STORE -------
-def choose_store
-  Store.all.shuffle.first
-end
-
-# --------------- CREATES NEW LOTTERY TICKET ------------------------------
+# --------------- CREATES NEW LOTTERY TICKET ----------
 def new_lottery_ticket(user)
   #----- CHOOSES EXISTING STORE -------
   store = choose_store
@@ -111,143 +109,102 @@ def new_lottery_ticket(user)
   )
 
 end
+# --------------- ENDS CREATES NEW LOTTERY TICKET METHODS ------
 
-
-
-# --------------- ENDS CREATES NEW LOTTERY TICKET METHODS -------------------------
-
-#------------------------ BEGIN CHECK YOU TICKET-------------------
+#------------------------ BEGIN CHECK YOUR TICKET---------------
 def check_ticket
   puts "Would you like to check your ticket? yes/no"
     answer = gets.chomp
     if answer == "yes"
       #program continues to execute
     elsif answer == "no"
-      puts "Ok thanks, come back later to check your ticket"
+      puts "Ok, I guess you don't have to check it."
       exit
     else
       puts "It's a yes or no question."
       #TO DO stretch goal loops back through puts "Would you like to buy a ticket? yes/no"
-      #to do terminal flashes red
       exit
     end
 end
+
 
 def check_against_winning_lottery_numbers(ticket)
-    # lottery_numbers = ticket
-    # binding.pry
+
     if ticket.num1 == @winning_lottery_numbers[0]
       puts "#{ticket.num1} is a match! You won $10"
-      #TO DO Adds $10 to userwallet
-      #TO DO adds a different amount of $ based on how many numbers match
-      #TO DO terminal flashes many colors when you win
+      current_wallet = Customer.last.bank_account
+      new_wallet = current_wallet + 10
+      Customer.last.update(bank_account: new_wallet)
     else
-      puts "#{ticket.num1} doesn't match. You didn't win.  Maybe next time... you never know!"
-      #TO DO terminal flashes red
-      exit
+      puts "#{ticket.num1} doesn't match."
+      # exit
     end
+
     if ticket.num2 == @winning_lottery_numbers[1]
-      puts "#{ticket.num2} is a match! You won $10"
-      #TO DO Adds $10 to userwallet
-      #TO DO adds a different amount of $ based on how many numbers match
-      #TO DO terminal flashes many colors when you win
+      puts "#{ticket.num2} is a match! You won $20"
+      current_wallet = Customer.last.bank_account
+      new_wallet = current_wallet + 20
+      Customer.last.update(bank_account: new_wallet)
     else
-      puts "#{ticket.num2} doesn't match. You didn't win the grand prize.  Maybe next time... you never know!"
-      #TO DO terminal flashes red
-      exit
+      puts "#{ticket.num2} doesn't match."
+      # exit
     end
+
     if ticket.num3 == @winning_lottery_numbers[2]
-      puts "#{ticket.num3} is a match! You won $10"
-      #TO DO Adds $10 to userwallet
-      #TO DO adds a different amount of $ based on how many numbers match
-      #TO DO terminal flashes many colors when you win
+      puts "#{ticket.num3} is a match! You won $30"
+      current_wallet = Customer.last.bank_account
+      new_wallet = current_wallet + 30
+      Customer.last.update(bank_account: new_wallet)
     else
-      puts "#{ticket.num3} doesn't match. You didn't win the grand prize.  Maybe next time... you never know!"
-      #TO DO terminal flashes red
-      exit
+      puts "#{ticket.num3} doesn't match."
     end
+
     if ticket.num4 == @winning_lottery_numbers[3]
-      puts "#{ticket.num4} is a match! You won $10"
-      #TO DO Adds $10 to userwallet
-      #TO DO adds a different amount of $ based on how many numbers match
-      #TO DO terminal flashes many colors when you win
+      puts "#{ticket.num4} is a match! You won $40"
+      current_wallet = Customer.last.bank_account
+      new_wallet = current_wallet + 40
+      Customer.last.update(bank_account: new_wallet)
     else
-      puts "#{ticket.num4} doesn't match. You didn't win the grand prize.  Maybe next time... you never know!"
-      #TO DO terminal flashes red
-      exit
+      puts "#{ticket.num4} doesn't match."
     end
+
     if ticket.num5 == @winning_lottery_numbers[4]
-      puts "#{ticket.num5} is a match! You're a grand prize winner!!!  YOU JUST WON ONE MILLION DOLLARS"
-      #TO DO Adds $1_000_000 to userwallet
-      #TO DO adds a different amount of $ based on how many numbers match
-      #TO DO terminal flashes many colors when you win
+      puts "#{ticket.num5} is a match! You won $1000!!!!"
+      current_wallet = Customer.last.bank_account
+      new_wallet = current_wallet + 1000
+      Customer.last.update(bank_account: new_wallet)
     else
-      puts "#{ticket.num5} doesn't match. You didn't win the grand prize.  Maybe next time... you never know!"
-      #TO DO terminal flashes red
-      exit
+      puts "#{ticket.num5} doesn't match."
+
     end
+
 end
 
-# customer = Customer.new(name, bank_account, age)
-# customer.save
-#Customer.new.save(name, age, money)
-#TO DO : creates customer with the given info (name, age, bank_account)
-# look into .create
+#------------------------ END CHECK YOUR TICKET-----------------
 
-# if money < 3
-#   #TO DO: if there is a $ it changes to just the number
-#   puts "Sorry you need more money to play lottery."
-#   exit
-# else
-#   puts "Alright, #{name}, let's play lottery!"
-#   #TO DO: assigns a store instance to this game
-# end
+# >------------------ BEGIN DESTROY TICKET ---------------------
 
-# puts "Would you like to buy a ticket? yes/no"
-  #write a method that gets me a random store
-# answer = gets.chomp
+def destroy_ticket
+  puts "You're done with your ticket. Would you like to throw it away? (yes/no)"
+    answer = gets.chomp
+    if answer == "yes"
+      LotteryTicket.last.destroy
+    elsif answer == "no"
+      puts "Ok, I guess you can hold onto it."
+      exit
+    else
+      puts "It's a yes or no question."
+      #TO DO stretch goal loops back through puts "Would you like to throw it away? yes/no"
+      exit
+    end
+# >------------------ END DESTROY TICKET ------------------------
+
+end
 
 
-# if answer == "yes"
-#   #create ticket -- will have store info, customer info, lottery_numbers
-#   store = Store.all.rand
-#   lottery_ticket = Lottery_ticket.new(Customer.all.last.id, store.id,)
-#   lottery_ticket.save
-#   puts "These are you lottery numbers:"
-#   lottery_numbers = 5.times { puts (rand() * 5).to_i }
-#   puts lottery_numbers
-#   #get the numbers
-#   #TO DO ; seperat method
-#   #takes $3 from customer bank_account
-#   #adds $3 to store bank_account
-#   #checks against winning_lottery_numbers
-#     if lottery_numbers == winning_lottery_numbers
-#       puts "You won :)"
-#       #TO DO Adds $100 to
-#       #TO DO adds a different amount of $ based on how many numbers match
-#       #TO DO terminal flashes many colors when you win
-#     else
-#       puts "You didn't win.  Maybe next time... you never know!"
-#       #TO DO terminal flashes red
-#     end
-# elsif answer == "no"
-#   puts "Ok thanks, come back later to play lottery"
-#   exit
-# else
-#   puts "It's a yes or no question."
-#   #TO DO stretch goal loops back through puts "Would you like to buy a ticket? yes/no"
-#   #to do terminal flashes red
-#   exit
-# end
-#
-
-#update bank account of customer and stores
-#ability to throw away lottery_tickets
-  #if winning_lottery_numbers
-  #puts "You won $25!"
-  #adds 25 to customer bank_account
-  # else
-  #puts "You didn't win.  Maybe next time... you never know!"
-  #puts
-
-  #DESTROY ; THROW AWAY TICKET, DELETES FROM DTABASE
+  #stretch goal how many tickets has customer bought, how much money spent/won
+  #stretch goal terminal flashes many colors when you win
+  #stretch goal terminal flashes red when you lost
+  #stretch goal find a more elegant way to check tickets
+  #stretch goal make store chosen with customer creation
+  #stretch goal write a helper method that cuts the dollar sign off the wallet input if it is there
