@@ -103,3 +103,60 @@
     # prize_money
 
      # binding.pry
+
+
+
+
+           #
+           # slot = "num" + num.counter += 1
+           #
+           # ticket["num#{var}"]
+
+         #
+         # if ticket.num1 == @winning_lottery_numbers[0]
+         #   puts "#{ticket.num1} is a match! You won $10"
+         #   current_wallet = Customer.last.bank_account
+         #   new_wallet = current_wallet + 10
+         #   Customer.last.update(bank_account: new_wallet)
+         # else
+         #   puts "#{ticket.num1} doesn't match."
+         #   # exit
+         # end
+         #
+         # if ticket.num2 == @winning_lottery_numbers[1]
+         #   puts "#{ticket.num2} is a match! You won $20"
+         #   current_wallet = Customer.last.bank_account
+         #   new_wallet = current_wallet + 20
+         #   Customer.last.update(bank_account: new_wallet)
+         # else
+         #   puts "#{ticket.num2} doesn't match."
+         #   # exit
+         # end
+         #
+         # if ticket.num3 == @winning_lottery_numbers[2]
+         #   puts "#{ticket.num3} is a match! You won $30"
+         #   current_wallet = Customer.last.bank_account
+         #   new_wallet = current_wallet + 30
+         #   Customer.last.update(bank_account: new_wallet)
+         # else
+         #   puts "#{ticket.num3} doesn't match."
+         # end
+         #
+         # if ticket.num4 == @winning_lottery_numbers[3]
+         #   puts "#{ticket.num4} is a match! You won $40"
+         #   current_wallet = Customer.last.bank_account
+         #   new_wallet = current_wallet + 40
+         #   Customer.last.update(bank_account: new_wallet)
+         # else
+         #   puts "#{ticket.num4} doesn't match."
+         # end
+         #
+         # if ticket.num5 == @winning_lottery_numbers[4]
+         #   puts "#{ticket.num5} is a match! You won $1000!!!!"
+         #   current_wallet = Customer.last.bank_account
+         #   new_wallet = current_wallet + 1000
+         #   Customer.last.update(bank_account: new_wallet)
+         # else
+         #   puts "#{ticket.num5} doesn't match."
+         #
+         # end
