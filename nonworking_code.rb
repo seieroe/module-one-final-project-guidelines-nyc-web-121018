@@ -160,3 +160,26 @@
          #   puts "#{ticket.num5} doesn't match."
          #
          # end
+
+
+         #
+         # def randomize_winning_lottery_numbers
+         #     winning_lottery_numbers = 5.times.map { (rand() * 5).to_i }
+         #   #push 5 winning numbers into this array
+         # end
+         #
+         # #------ ADMIN (BOSS) MODE-----
+         #
+         # def boss_method
+         #
+         # end
+
+         #-----------------------------
+
+         # ADD ADMIN LOGIN THAT ALLOWS YOU PUT IN A NEW LOTTERY TICKET Number
+         # CREATE A DATABASE OF RANDOMLY CREATED NUMBERS
+
+
+           # if username == "I'm the boss."
+           #   boss_method
+           # end
